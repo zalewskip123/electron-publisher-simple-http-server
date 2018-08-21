@@ -1,1 +1,1 @@
-# electron-simple-http-server
+# electron-publisher-simple-http-server
