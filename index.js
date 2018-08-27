@@ -5,7 +5,7 @@ const path = require("path");
 const mkDirByPathSync = require("./mkDirByPathSync");
 const url = require("url");
 
-const DATA_DIR = path.join("./pliczki2");
+const DATA_DIR = path.join("./storage");
 
 http
   .createServer(async (req, res) => {
@@ -31,10 +31,7 @@ http
       res.end();
     } else if (req.method === "GET") {
       const u = url.parse(req.url);
-      const filepath = path.join(
-        DATA_DIR,
-        u.pathname.replace(/%20/g, "-").toLowerCase()
-      );
+      const filepath = path.join(DATA_DIR);
       console.log("read", filepath);
       const rs = fs.createReadStream(filepath);
       rs.on("error", err => {
