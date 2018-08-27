@@ -10,9 +10,6 @@ const DATA_DIR = path.join("./storage");
 http
   .createServer(async (req, res) => {
     if (req.method === "POST") {
-      console.log("add", req.headers);
-      console.log("add", req.url);
-
       const fileContent = await new Promise((resolve, reject) => {
         const body = [];
         req.on("data", chunk => body.push(chunk));
@@ -31,11 +28,9 @@ http
       res.end();
     } else if (req.method === "GET") {
       const u = url.parse(req.url);
-      const filepath = path.join(DATA_DIR);
-      console.log("read", filepath);
+      const filepath = path.join(DATA_DIR, u.pathname);
       const rs = fs.createReadStream(filepath);
       rs.on("error", err => {
-        console.log("read err", err, filepath);
         res.writeHead(404);
         res.end();
       });
